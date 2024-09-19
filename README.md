@@ -1,8 +1,30 @@
-# quarkus_redis
+# Quarkus Redis Project - Version 3.14.3
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This project demonstrates the usage of Quarkus 3.14.3 with Redis, implementing two different repositories: RedisLowLevelAPIRepository and RedisHighLevelAPIRepository. Each repository provides an alternative way to connect and interact with Redis.
+Features
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+    Quarkus 3.14.3
+    Redis operations
+    Interface-driven architecture
+    Two Redis repository implementations:
+        RedisLowLevelAPIRepository (Low-level API connection)
+        RedisHighLevelAPIRepository (High-level API connection)
+
+# Project Structure
+
+src<br>
+└── main<br>
+├── java<br>
+│   └── br/com/redis/service<br>
+│       ├── RedisService.java<br>
+│   └── br/com/redis/repository<br>
+│       ├── RedisLowLevelAPIRepository.java <br>
+│       └── RedisHighLevelAPIRepository.java
+[
+]()
+# RedisService Interface
+[README.md](README.md)
+The RedisService interface defines methods that are implemented by both RedisLowLevelAPIRepository and RedisHighLevelAPIRepository.
 
 ## Running the application in dev mode
 
