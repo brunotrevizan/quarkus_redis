@@ -1,7 +1,7 @@
 # Quarkus Redis Project - Version 3.14.3
 
-This project demonstrates the usage of Quarkus 3.14.3 with Redis, implementing two different repositories: RedisLowLevelAPIRepository and RedisHighLevelAPIRepository. Each repository provides an alternative way to connect and interact with Redis.
-Features
+This project demonstrates the usage of Quarkus 3.14.3 with Redis, implementing two different repositories: RedisLowLevelAPIRepository and RedisHighLevelAPIRepository. Each repository provides an alternative way to connect and interact with Redis.<br>
+Features:
 
     Quarkus 3.14.3
     Redis operations
