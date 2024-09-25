@@ -5,6 +5,7 @@ import br.com.redis.service.RedisService;
 import io.smallrye.mutiny.Uni;
 import io.vertx.core.json.JsonObject;
 import io.vertx.mutiny.redis.client.RedisAPI;
+import io.vertx.mutiny.redis.client.Response;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -22,8 +23,12 @@ public class RedisLowLevelAPIRepository implements RedisService {
 
     private static final Logger LOG = Logger.getLogger(RedisLowLevelAPIRepository.class);
 
+    private RedisAPI redisAPI;
+
     @Inject
-    RedisAPI redisAPI;
+    public RedisLowLevelAPIRepository(RedisAPI redisAPI) {
+        this.redisAPI = redisAPI;
+    }
 
     @Override
     public void set(String key, String value) {
@@ -46,10 +51,8 @@ public class RedisLowLevelAPIRepository implements RedisService {
     @Override
     public Uni<String> getRange(String key, int start, int end) {
         return redisAPI.getrange(key, String.valueOf(start), String.valueOf(end))
-                .map(value -> value.toString())
-                .onFailure().invoke(err -> {
-                    LOG.error("Error on getRange: " + err.getMessage(), err);
-                });
+                .map(Response::toString)
+                .onFailure().invoke(err -> LOG.error("Error on getRange: " + err.getMessage(), err));
     }
 
     @Override
@@ -73,9 +76,7 @@ public class RedisLowLevelAPIRepository implements RedisService {
                     }
                     return hash;
                 })
-                .onFailure().invoke(err -> {
-                    LOG.error("Error on hGetAll: " + err.getMessage(), err);
-                });
+                .onFailure().invoke(err -> LOG.error("Error on hGetAll: " + err.getMessage(), err));
     }
 
     @Override
@@ -85,12 +86,9 @@ public class RedisLowLevelAPIRepository implements RedisService {
                     if (buffer == null) {
                         return null;
                     }
-                    String value = buffer.toString();
-                    return value;
+                    return buffer.toString();
                 })
-                .onFailure().invoke(err -> {
-                    LOG.error("Error on hget: " + err.getMessage(), err);
-                });
+                .onFailure().invoke(err -> LOG.error("Error on hget: " + err.getMessage(), err));
     }
 
     @Override
@@ -133,7 +131,7 @@ public class RedisLowLevelAPIRepository implements RedisService {
                 .subscribe().with(
                 success -> LOG.info("Hash expiration defined successfully"),
                 failure -> LOG.error("Error on defining hash expiration")
-        );;
+        );
     }
 
     @Override

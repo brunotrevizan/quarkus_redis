@@ -18,13 +18,14 @@ import java.util.Map;
 @Path("/redis")
 public class RedisResource {
 
+    private RedisService highLevelAPI;
+    private RedisService lowLevelApi;
+
     @Inject
-    @HighLevelAPI
-    RedisService highLevelAPI;
-    
-    @Inject
-    @LowLevelAPI
-    RedisService lowLevelApi;
+    public RedisResource(@HighLevelAPI RedisService highLevelAPI, @LowLevelAPI RedisService lowLevelApi){
+        this.highLevelAPI = highLevelAPI;
+        this.lowLevelApi = lowLevelApi;
+    }
 
     @POST
     @Path("/set/{key}/{value}/{lowlevel}")

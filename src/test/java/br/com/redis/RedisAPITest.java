@@ -1,21 +1,17 @@
 package br.com.redis;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.test.junit.QuarkusTest;
-
 import static io.restassured.RestAssured.given;
-
-import io.restassured.http.ContentType;
+import static org.hamcrest.Matchers.equalTo;
 
 @QuarkusTest
-public class RedisAPITest {
+class RedisAPITest {
 
     @Test
-    public void testRedisSetOperation() {
+    void testRedisSetOperation() {
         given()
                 .accept(ContentType.JSON)
                 .when()
