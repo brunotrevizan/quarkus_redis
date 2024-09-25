@@ -1,7 +1,7 @@
 package br.com.redis.rest;
 
-import br.com.redis.repository.qualifiers.HighLevelAPI;
-import br.com.redis.repository.qualifiers.LowLevelAPI;
+import br.com.redis.qualifiers.HighLevelAPI;
+import br.com.redis.qualifiers.LowLevelAPI;
 import br.com.redis.service.RedisService;
 import io.vertx.core.json.JsonObject;
 import jakarta.inject.Inject;
@@ -11,7 +11,6 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
 
 import java.util.Map;
@@ -126,6 +125,13 @@ public class RedisResource {
         } else {
             highLevelAPI.insertHashWithExpiration(key, new JsonObject(json), expiration);
         }
+        return Response.ok().build();
+    }
+
+    @DELETE
+    @Path("/flushall")
+    public Response flushall() {
+        highLevelAPI.flushAll();
         return Response.ok().build();
     }
 

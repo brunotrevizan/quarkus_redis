@@ -27,4 +27,6 @@ public interface RedisService {
 
     void insertHashWithExpiration(String key, JsonObject fields, int expirationTimeInSeconds);
 
+    void flushAll();
+
 }

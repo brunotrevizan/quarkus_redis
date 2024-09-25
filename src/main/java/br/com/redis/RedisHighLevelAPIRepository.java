@@ -1,6 +1,6 @@
-package br.com.redis.repository;
+package br.com.redis;
 
-import br.com.redis.repository.qualifiers.HighLevelAPI;
+import br.com.redis.qualifiers.HighLevelAPI;
 import br.com.redis.service.RedisService;
 import io.quarkus.redis.datasource.RedisDataSource;
 import io.quarkus.redis.datasource.hash.HashCommands;
@@ -86,6 +86,11 @@ public class RedisHighLevelAPIRepository implements RedisService {
     public void insertHashWithExpiration(String key, JsonObject fields, int expirationTimeInSeconds) {
         hmSet(key, fields);
         keyCommands.expire(key, expirationTimeInSeconds);
+    }
+
+    @Override
+    public void flushAll() {
+        redisDataSource.flushall();
     }
 
 }

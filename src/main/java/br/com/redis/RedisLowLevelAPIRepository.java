@@ -1,14 +1,12 @@
-package br.com.redis.repository;
+package br.com.redis;
 
-import br.com.redis.repository.qualifiers.LowLevelAPI;
+import br.com.redis.qualifiers.LowLevelAPI;
 import br.com.redis.service.RedisService;
 import io.smallrye.mutiny.Uni;
 import io.vertx.core.json.JsonObject;
 import io.vertx.mutiny.redis.client.RedisAPI;
-import io.vertx.redis.client.Response;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -136,5 +134,10 @@ public class RedisLowLevelAPIRepository implements RedisService {
                 success -> LOG.info("Hash expiration defined successfully"),
                 failure -> LOG.error("Error on defining hash expiration")
         );;
+    }
+
+    @Override
+    public void flushAll() {
+        throw new UnsupportedOperationException("Not implemented");
     }
 }

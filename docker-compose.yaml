@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  redis:
+    container_name: redis_quarkus
+    image: redis:7.0-alpine
+    command: redis-server
+    ports:
+      - "6379:6379"
+
+
+  quarkus-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      - QUARKUS_REDIS_HOSTS=redis://redis:6379
+
+volumes:
+  redis-data:
