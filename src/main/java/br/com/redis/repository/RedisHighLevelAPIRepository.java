@@ -1,4 +1,4 @@
-package br.com.redis;
+package br.com.redis.repository;
 
 import br.com.redis.qualifiers.HighLevelAPI;
 import br.com.redis.service.RedisService;
